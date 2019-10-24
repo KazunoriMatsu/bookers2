@@ -1,0 +1,32 @@
+<div class="userinfo">
+	<h1>User info</h1>
+	<div class="flash">
+				<% flash.each do |key, value| %>
+				  <%= content_tag(:div, value, class: "#{key}") %>
+				<% end %>
+				 <% if @user.errors.any? %>
+				  <div id="error_explanation" class="alert alert-danger">
+				  	<%= @user.errors.count %>errors prohibited this obj from being saved:
+				    <ul>
+				      <% @user.errors.full_messages.each do |message| %>
+				        <li><%= message %></li>
+				      <% end %>
+				    </ul>
+				  </div>
+				<% end %>
+
+<%= form_for(@user) do |t| %>
+
+  <h4>Name</h4>
+  <%= t.text_field :name %>
+
+  <h4>Image</h4>
+  <%= t.attachment_field :profile_image%>
+
+  <h4>Introduction</h4>
+  <%= t.text_area :introduction %>
+
+  <%= t.submit 'Update User' %>
+
+<% end %>
+</div>

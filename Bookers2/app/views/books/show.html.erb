@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+    	<div class="flash">
+<% flash.each do |key, value| %>
+  <%= content_tag(:div, value, class: "#{key}") %>
+<% end %>
+</div>
+<% if @book.errors.any? %>
+				  <div id="error_explanation" class="alert alert-danger">
+				    <ul>
+				      <% @book.errors.full_messages.each do |message| %>
+				        <li><%= message %></li>
+				      <% end %>
+				    </ul>
+				  </div>
+				<% end %>
+      <h2>User info</h2>
+      <% if @book1.user.profile_image != nil %>
+        <%= attachment_image_tag @book1.user, :profile_image, :fill, 100, 100, format: 'jpeg' %>
+        <% else %>
+        <%= image_tag 'sample_img.jpeg', style: "height: 150px" %>
+        <% end %>
+
+ 		<table class="table table-hover">
+      <tr>
+        <td>name</td>
+        <td><%= @book1.user.name %></td>
+      </tr>
+      <tr>
+        <td>introduction</td>
+        <td><%= @book1.user.introduction %></td>
+      </tr>
+      <tr>
+      	<td>
+      		<%= link_to(edit_user_path(@book1.user.id), class:  "btn btn-default") do %>
+		<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+		<% end -%>
+      	</td>
+      </tr>
+    </table>
+
+    <h2>New book</h2>
+      <%= form_for(@book) do |t| %>
+      <h4>Title</h4>
+      <%= t.text_field :title%>
+
+      <h4>Opinion</h4>
+      <%= t.text_area :body%>
+
+      <br>
+      <%= t.submit 'Create Book', class: "btn btn-primary"%>
+      <% end %>
+    </div>
+    <div class="col-lg-9">
+    	<h2>Book detail</h2>
+      <table class="table table-striped">
+            <tr>
+            	<td>
+            		<% if @book1.user.profile_image != nil %>
+        <%= attachment_image_tag @book1.user, :profile_image, :fill, 40, 40, format: 'jpeg' %>
+        <% else %>
+        <%= image_tag 'sample_img.jpeg', style: "height: 40px" %>
+        <p><%= link_to @book1.user.name, user_path(@book1.user) %></p>
+        <% end %>
+            	</td>
+            	<td><%= link_to @book1.title, book_path(@book1.id) %></td>
+              <!-- <td><%= @book1.title %></td> -->
+              <td><%= @book1.body %></td>
+              	<% if @book1.user_id == current_user.id %>
+	              	<td>
+	              		<%= link_to "Edit", edit_book_path(@book1.id) %>
+	              	</td>
+			     		  	<td>
+			     		  		<%= link_to 'Destroy', book_path(@book1), method: :delete, data: { confirm: 'Are you sure?' } %>
+		     		  		</td>
+		     		  		<% else %>
+									<td></td>
+									<td></td>
+		     		  	<% end %>
+		     		  </td>
+            </tr>
+      </table>
+    </div>
+  </div>
+</div>

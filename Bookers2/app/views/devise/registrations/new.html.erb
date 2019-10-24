@@ -1,0 +1,50 @@
+
+<body>
+  <div class="sign-up">
+    <h2>Sign up</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |t| %>
+    <%= devise_error_messages! %>
+    <div class="form-group has-icon">
+   
+
+    <div class="field">
+  <%= t.label :name %><br />
+  <%= t.text_field :name, autofocus: true, autocomplete: "name" %>
+</div>
+
+<div class="field">
+  <%= t.label :email %><br />
+  <%= t.email_field :email, autocomplete: "email" %>
+</div>
+
+    <div class="field">
+      <%= t.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= t.password_field :password, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= t.label :password_confirmation %><br />
+      <%= t.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+
+    <div class="actions">
+      <%= t.submit "Sign up" %>
+    </div>
+    <%= link_to "Log in", new_user_session_path %>
+    <% end %>
+  </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+
+<body>
+	<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+
+  <div class="book-edit-title">
+ <h1>Editing Book</h1>
+
+ <% if @book.errors.any? %>
+				  <div id="error_explanation" class="alert alert-danger">
+				  	<%= @book.errors.count %>errors prohibited this obj from being saved:
+				    <ul>
+				      <% @book.errors.full_messages.each do |message| %>
+				        <li><%= message %></li>
+				      <% end %>
+				    </ul>
+				  </div>
+				<% end %>
+
+
+
+<%= form_for(@book) do |t| %>
+
+	<p>Title</p>
+	<%= t.text_field :title%>
+
+	<p>Body</p>
+	<%= t.text_area :body%>
+	<br>
+	<br>
+	<%= t.submit 'Update Book'%>
+<% end %>
+
+<p>
+	<%= link_to "show", book_path %>
+	|
+    <%= link_to "Back", books_path %>
+</p>
+	</div>
+</body>
+</div>
+<div class="col-lg-9">
+	</div>
+</div>
+</div>
